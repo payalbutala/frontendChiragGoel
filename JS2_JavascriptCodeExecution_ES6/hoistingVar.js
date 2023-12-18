@@ -29,8 +29,8 @@ b = 20;
  */
 
 // Example 3
-console.log(a, b); // ReferenceError: a is not defined.
+/* console.log(a, b); // ReferenceError: a is not defined.
 a = 10;
-var b = 20;
+var b = 20; */
 
 // after hoisting converted as

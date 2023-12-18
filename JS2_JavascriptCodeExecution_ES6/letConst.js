@@ -19,3 +19,12 @@ const aa = 10;
 const ab; // SyntaxError: Missing initializer in const declaration
 ab = 10;
 console.log(ab); */
+
+/* for (let i = 0; i < 5; i++) {
+  console.log("First >", i);
+}
+
+// let is used above so ReferenceError : i is not defined, if var is used above below code will execute.
+for (; i < 5; i++) {
+  console.log("Second >", i);
+} */
