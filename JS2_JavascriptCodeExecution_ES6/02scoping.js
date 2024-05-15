@@ -12,7 +12,7 @@ function global() {
 
     function inner() {
       var i = "inner scope";
-      console.log("3", g, o, i);
+      console.log("3", g, o, i); // "3" global scope outer scope inner scope
     }
 
     inner();
@@ -21,3 +21,5 @@ function global() {
 }
 
 global();
+
+// 2 context : 1. Global Level & 2. function level

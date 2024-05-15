@@ -1,4 +1,5 @@
-// Arithmetic Operator
+// Arithmetic Operator : +, -, /, *, %, ++, --
+
 /* var count = 0;
 count = count + 1;
 console.log(count);
@@ -15,11 +16,12 @@ console.log(totalPrice - [totalPrice * 0.35]);
 
 console.log("mod : ", 5 % 2); */
 
-// Assignment Operator
+// Assignment Operator : =, +=, -=, *=, /=, %=
+
 /* console.log(++count);
 console.log((count += 2)); */
 
-// Comparison Operator
+// Comparison Operator ==, ===, >=, <=, >, <, !=, !==
 /* console.log("1 == 1 =>", 1 == 1);
 
 console.log("true == true =>", true == true);
@@ -34,7 +36,7 @@ console.log('"true" == "true" =>', "true" == "true");
 console.log('false == "false" =>', false == "false");
 console.log('0 == "false" =>', 0 == "false"); */
 
-// Conditional Operator : Ternary OR if-else
+// Conditional Operator : Ternary OR if-else : ?
 /* var cartQuantity = 0;
 if (cartQuantity) {
   console.log("Widget 1");
@@ -85,7 +87,7 @@ console.log(typeof n); // boolean
 n = "Pavi";
 console.log(typeof n); // string */
 
-// Logical Operator : && => DADAJI : Retruns 1st FALSY value OR Last Truty Value
+// Logical Operator : &&, || : && => DADAJI : Retruns 1st FALSY value OR Last Truty Value
 /* console.log(true && true); // true
 console.log(false && false); // false
 console.log(true && false); // false

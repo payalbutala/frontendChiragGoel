@@ -1,4 +1,4 @@
-// Named Function : works same as var hoisting
+// Named Function : works same as var hoisting, function hoisted at top
 /* console.log(sum(1, 2)); // => 3 as sum function defination is hoisted.
 function sum(a, b) {
   return a + b;
