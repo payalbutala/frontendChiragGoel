@@ -18,7 +18,8 @@ console.log("mod : ", 5 % 2); */
 
 // Assignment Operator : =, +=, -=, *=, /=, %=
 
-/* console.log(++count);
+/* var count = 1;
+console.log(++count);
 console.log((count += 2)); */
 
 // Comparison Operator ==, ===, >=, <=, >, <, !=, !==
@@ -26,7 +27,7 @@ console.log((count += 2)); */
 
 console.log("true == true =>", true == true);
 console.log("true == 1 => ", true == 1);
-console.log('"true" == 1 => ', "true" == 1); // false
+console.log('"true" == 1 => ', "true" == 1); // false ->  JavaScript coerces "true" to a number, it becomes NaN (Not a Number), because "true" cannot be converted to a meaningful numeric value.
 
 console.log('true == "true" =>', true == "true"); // false
 console.log('"true" == true =>', "true" == true); // false
@@ -75,7 +76,7 @@ switch (cartQuantity) {
   default: {
     console.log("Widget 3");
   }
-} */
+}
 
 // TypeOf Operator : datatype automatically change as per value assigned
 /* var n = 1;
