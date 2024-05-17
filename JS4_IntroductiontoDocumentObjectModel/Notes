@@ -1,0 +1,35 @@
+// DOM
+// in console =>
+// document -> object
+obj = {
+  document: {
+    children: [
+      {
+        a: 1,
+        b: 2,
+      },
+    ],
+  },
+};
+// access a -> obj.document.children[0].a
+
+document.getElementById("title");
+document.getElementsByClassName("movies")[4];
+document.getElementsByTagName("h3");
+document.querySelectorAll("p b");
+document.querySelector("p b"); // return 1st
+// innerHTML -> can add html code inside it.
+document.querySelector("#title").innerHTML = "<b>Book My Class</b>";
+// innerText -> only text no html tags
+document.querySelector("#title").innerText = "Book My Class";
+// style
+document.querySelector("h1").style.color = "red";
+document.querySelector("h1").style.fontSize = "20px";
+document.querySelectorAll("h1")[0].style.fontSize = "26px";
+document.querySelectorAll(".movies")[4].remove();
+document.querySelectorAll(".movies")[2].style.backgroundColor = "red";
+
+// removechild - give reference of parent & child
+document
+  .querySelector(".container")
+  .removeChild(document.querySelectorAll(".movies")[2]);
