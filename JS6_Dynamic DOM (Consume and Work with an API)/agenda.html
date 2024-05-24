@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      body {
+        font-size: 20px;
+        font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>Agenda</h2>
+    <ul>
+      <li>
+        JSON : JavaScript Object Notation
+        <ol>
+          <li>Looks like object with key pair value. Key in double quotes.</li>
+          <li>
+            Value : String, number, object, array, boolean, null. [Invalid
+            Values for json but valid for object: undefined, function, symbols,
+            date ]
+          </li>
+          <li>
+            To communicate between 1 machine & another JSON should be converted
+            to string by method JSON.stringify(obj) [Serialization] and convery
+            back to JSON using JSON.parse(str)
+          </li>
+          <li>
+            API : get & send data form server to client, helps to communicate
+            between 2 machines (client and server)
+          </li>
+          <li>endpoint = URL</li>
+          <li>
+            API -> call api method provided by browser - fetch which will
+            request & you will get response.
+            <b>Three things happens in response : </b>
+            <ol>
+              <li>wait</li>
+              <li>success</li>
+              <li>failure</li>
+            </ol>
+          </li>
+          <li>
+            Promise helps to do chining
+            <ol>
+              <li>
+                then method after request if its request fulfilled/success -
+                execute
+              </li>
+              <li>
+                catch method after request if its request error/falied - caught
+              </li>
+            </ol>
+          </li>
+        </ol>
+      </li>
+    </ul>
+    <hr />
+    <h3>Revision</h3>
+  </body>
+</html>
