@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <link href="./01style.css" rel="stylesheet" />
+  </head>
+  <body>
+    <header>
+      <div class="priority-filter">
+        <div class="box p1"></div>
+        <div class="box p2"></div>
+        <div class="box p3"></div>
+        <div class="box p4"></div>
+      </div>
+      <div class="quick-action">
+        <div class="icon add"><i class="fas fa-plus add"></i></div>
+        <div class="icon delete"><i class="fa-solid fa-xmark"></i></div>
+      </div>
+    </header>
+    <main>
+      <section>
+        <h1>Kanban Board</h1>
+        <div class="modal">
+          <div class="left-section">
+            <textarea placeholder="Enter Your Task"></textarea>
+          </div>
+          <div class="right-section">
+            <div class="close"><i class="fa-solid fa-xmark"></i></div>
+            <div class="priority-filter">
+              <div class="box p1"></div>
+              <div class="box p2"></div>
+              <div class="box p3"></div>
+              <div class="box p4 selected"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+    <script src="./01index.js"></script>
+  </body>
+</html>
