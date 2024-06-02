@@ -1,36 +1,51 @@
-openModalButtonRef = document.querySelector(".quick-action .icon.add");
-modalRef = document.querySelector(".modal");
-closeModalButtonRef = document.querySelector(".modal .right-section .close");
-deleteRef = document.querySelector(".delete");
-ticketSectionRef = document.querySelector(".ticket-section");
-
+const openModalButtonRef = document.querySelector(".quick-action .icon.add");
+const modalRef = document.querySelector(".modal");
+const closeModalButtonRef = document.querySelector(
+  ".modal .right-section .close"
+);
+const deleteDivRef = document.querySelector(".quick-action .icon.delete");
+const ticketSectionRef = document.querySelector(".ticket-section");
 const textAreaRef = document.querySelector(".modal .left-section textarea");
 const priorityBoxRef = document.querySelectorAll(
   ".modal .right-section .priority-filter .box"
 );
+const priorityFilterRef = document.querySelector(".priority-filter");
+const clearFilterRef = document.querySelector(".clear-filter");
 
-const tasks = [
+const data = [
   {
-    id: 1,
+    id: new ShortUniqueId().rnd(),
     description: "task 1",
     priority: "p1",
   },
   {
-    id: 2,
+    id: new ShortUniqueId().rnd(),
     description: "task 2",
     priority: "p2",
   },
   {
-    id: 3,
+    id: new ShortUniqueId().rnd(),
     description: "task 3",
     priority: "p3",
   },
   {
-    id: 4,
+    id: new ShortUniqueId().rnd(),
     description: "task 4",
     priority: "p4",
   },
 ];
+
+let tasks = [];
+function initializeLocalStorage() {
+  if (getTasksFromLocalStorage()) {
+    tasks = getTasksFromLocalStorage();
+  } else {
+    tasks = data; // updating data in local variable.
+  }
+  updateTasksInLocalStorage(tasks);
+}
+initializeLocalStorage();
+
 listTickets(tasks);
 
 openModalButtonRef.addEventListener("click", function () {
@@ -68,7 +83,7 @@ function getSelectedclassPriority() {
   return priority;
 }
 
-// remove selected class from all box
+// remove selected class from all
 function removeSelectedClassFromBox() {
   [...priorityBoxRef].find((element) => {
     const isSelected = [...element.classList].includes("selected");
@@ -97,12 +112,13 @@ function addSelectedClassToCurrentBox(boxRef) {
 // create html for Tasks
 function createHtml(ticket) {
   //   console.log(ticket, "ticket");
-  return `<div class="ticket-priority ${ticket.priority}"></div>
+  return `<div class="ticket-priority" data-priority="${ticket.priority}"></div>
             <div class="ticket-id">${ticket.id}</div>
             <div class="ticket-content">
               <textarea value="text" disabled>${ticket.description}</textarea>
             </div>
-        <div class="ticket-lock locked"><i class="fa-solid fa-lock"></i><i class="fa-solid fa-lock-open"></i></div>`;
+        <div class="ticket-lock locked"><i class="fa-solid fa-lock"></i><i class="fa-solid fa-lock-open"></i></div>
+        <div class="ticket-delete"><i class="fa-solid fa-trash"></i></div>`;
 }
 
 // to empty ticket-section
@@ -148,23 +164,25 @@ textAreaRef.addEventListener("keyup", function (ev) {
     const description = ev.target.value;
     const priority1 = getSelectedclassPriority();
     // console.log(description, priority);
-    // let tasks = [];
+    // Instantiate
+    var uid = new ShortUniqueId().rnd(); // from library https://shortunique.id/classes/ShortUniqueId.html
     tasks.push({
-      id: tasks.length + 1,
+      id: uid(),
       description: description,
       priority: priority1,
     });
     // console.log(tempObj);
     textAreaRef.value = "";
     listTickets(tasks);
+    updateTasksInLocalStorage(tasks);
+    closeModal();
 
     // createHtml();
-    // closeModal();
   }
 });
 
 ticketSectionRef.addEventListener("click", function (ev) {
-  const classExists = ev.target.classList.contains("fa-solid");
+  const classExists = ev.target.classList.contains("fa-lock");
 
   if (classExists) {
     const currentTicketContainerRef = ev.target.closest(".ticket-container");
@@ -184,19 +202,37 @@ ticketSectionRef.addEventListener("click", function (ev) {
       lockRef.classList.add("locked");
       currentTextAreaRef.setAttribute("disabled", true);
     }
-
-    // currentTextAreaRef.addEventListener("blur", function (ev) {
-    //   const txtValue = ev.target.value;
-    //   tasks.find(function (ele, index) {
-    //     console.log(tasks[index].id, currentTicketId);
-    //     if (tasks[index].id == parseInt(currentTicketId)) {
-    //       tasks[index].description = txtValue;
-    //     }
-    //   });
-    // });
   }
-  // console.log(tasks);
+
+  // currentTextAreaRef.addEventListener("blur", function (ev) {
+  //   const txtValue = ev.target.value;
+  //   tasks.find(function (ele, index) {
+  //     console.log(tasks[index].id, currentTicketId);
+  //     if (tasks[index].id == parseInt(currentTicketId)) {
+  //       tasks[index].description = txtValue;
+  //     }
+  //   });
+  // });
+
+  if ([...ev.target.classList].includes("fa-trash")) {
+    const currentTicketContainerRef = ev.target.closest(".ticket-container");
+    const taskID = currentTicketContainerRef.getAttribute("data-id");
+    // console.log(taskID);
+    deleteTask(taskID);
+    listTickets(tasks); // updtaes tasks on UI after delete
+  }
+
+  if ([...ev.target.classList].includes("ticket-priority")) {
+    changePriority(ev.target);
+  }
 });
+
+function deleteTask(taskID) {
+  // console.log(taskID);
+  tasks = tasks.filter((task) => task.id !== taskID);
+  // console.log(tasks);
+  updateTasksInLocalStorage(tasks);
+}
 
 function updateTaskDescription(id, updatedDescription) {
   // console.log(id, updatedDescription);
@@ -212,4 +248,78 @@ function updateTaskDescription(id, updatedDescription) {
     selectedTask.description = updatedDescription;
   }
   console.log(tasks);
+  updateTasksInLocalStorage(tasks);
+}
+
+function updateTasksInLocalStorage(tasks) {
+  localStorage.setItem("tasks", JSON.stringify(tasks));
+}
+
+function getTasksFromLocalStorage(tasks) {
+  // JSON.parse('') => error OR JSON.parse(undefined) => error
+  const tasksData = localStorage.getItem("tasks");
+  return tasksData && JSON.parse(tasksData);
+  return tasksData ? JSON.parse(tasksData) : undefined;
+}
+
+deleteDivRef.addEventListener("click", function (ev) {
+  // console.log(ev.target);
+  // console.log(ev.currentTarget);
+  const isDeleteEnabled = ev.currentTarget.classList.contains("enabled");
+  if (!isDeleteEnabled) {
+    ev.currentTarget.classList.add("enabled");
+    ticketSectionRef.classList.add("enable-delete");
+  } else {
+    ev.currentTarget.classList.remove("enabled");
+    ticketSectionRef.classList.remove("enable-delete");
+  }
+});
+
+priorityFilterRef.addEventListener("click", function (ev) {
+  // console.log(ev.target.classList.contains("box"));
+  if (ev.target.classList.contains("box")) {
+    const selectedPriority = ev.target.id;
+    // console.log(selectedPriority);
+    const filteredTasks = tasks.filter(
+      (task) => task.priority === selectedPriority
+    );
+    listTickets(filteredTasks);
+    // updateTasksInLocalStorage(filteredTasks); no change in data, as its temporary data.
+  }
+});
+
+clearFilterRef.addEventListener("click", function () {
+  listTickets(tasks);
+});
+
+function getNextPriority(priorityStr) {
+  const prioirty = Number(priorityStr.split("p")[1]);
+  const priorities = [1, 2, 3, 4];
+  // return priority == priorities.length ? `p${0}` : `p${priority};
+  // OR
+  return `p${(prioirty % priorities.length) + 1}`;
+}
+
+function changePriority(domRef) {
+  // Change in DOM
+  const currentPriority = domRef.getAttribute("data-priority");
+  const currentTicketContainerRef = domRef.closest(".ticket-container");
+  const taskID = currentTicketContainerRef.getAttribute("data-id");
+  const nextPriority = getNextPriority(currentPriority);
+  // console.log(currentPriority, taskID, nextPriority);
+  domRef.setAttribute("data-priority", nextPriority);
+
+  // Update in tasks (in memory)
+  impactedTask = tasks.find((task) => task.id == taskID);
+  const tktID = impactedTask["id"];
+  // console.log("impactedTask");
+  tktRefID = tasks.filter((task) => {
+    if (task.id == tktID) {
+      task.priority = nextPriority;
+    }
+  });
+  // console.log(tasks);
+
+  // Update in localStorage
+  updateTasksInLocalStorage(tasks);
 }

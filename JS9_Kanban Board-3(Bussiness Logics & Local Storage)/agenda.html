@@ -13,20 +13,59 @@
   </head>
   <body>
     <h2>Agenda</h2>
+    <h4>JSON.parse('') => error OR JSON.parse(undefined) => error</h4>
     <ul>
       <li>
-        Kanban Board
+        Kanban Board : localStorage
         <ol>
           <li>Third party guid</li>
           <li>
-            localStorage (Persisit Data ways)
+            localStorage (Persisit Data ways) : store data and play with it in
+            client side.
             <ol>
-              <li>localStorage :</li>
-              <li>Cookie</li>
-              <li>Session</li>
-              <li>Server</li>
-              <li>Database</li>
-              <li>IndexedDB</li>
+              <li>
+                localStorage : always in browser permanent, even if you close
+                window.
+                <ul>
+                  <li><b>Key-Pair value where both are string</b></li>
+                  <li>Permanent on browser for specific domain.</li>
+                </ul>
+                <b>Methods:</b>
+                <ul>
+                  <li>setItem(key, value)</li>
+                  <li>getItem(key)</li>
+                  <li>removeItem(key)</li>
+                  <li>clear : clear entire local storage</li>
+                </ul>
+              </li>
+              <li>
+                Cookie : communicate between client and server. Stores
+                Authentication, Authorization related stuff. No need to login
+                again & again. It has expiry like to keep login for 8/15 days.
+                Almost all websites uses cookie. Even if you reload website it
+                keeps you logged in. Eg: Facebook, gmail.
+              </li>
+              <li>
+                Session : available only in same window or until we won't close.
+                Duplicate window, close-open tab - it wont available. Bank
+                Application Login in website based on security token.
+              </li>
+              <li>
+                IndexedDB : query on indexDB, large set of data, we you come
+                back your history is always there. Eg: Teams, web.whatsApp.com
+              </li>
+              <li>
+                Server
+                <ul>
+                  <li>on server, can be file format or permanent database.</li>
+                </ul>
+              </li>
+              <li>
+                Database
+                <ul>
+                  <li>on server, can be file format or permanent database.</li>
+                </ul>
+              </li>
             </ol>
           </li>
           <li>Filter</li>

@@ -67,7 +67,16 @@ header {
 }
 
 .quick-action .icon.delete {
+  color: white;
+}
+
+.quick-action .icon.delete.enabled {
   color: red;
+}
+
+.clear-filter {
+  margin-left: 15px;
+  padding: 10px;
 }
 
 .quick-action .icon:hover {
@@ -159,6 +168,9 @@ main h1 {
   gap: 15px;
   flex-wrap: wrap;
 }
+.ticket-section.enable-delete .ticket-delete {
+  display: block;
+}
 
 .ticket-container {
   background-color: #ccc;
@@ -187,16 +199,16 @@ main h1 {
   height: 20px;
 }
 
-.ticket-priority.p1 {
+.ticket-priority[data-priority="p1"] {
   background-color: pink;
 }
-.ticket-priority.p2 {
+.ticket-priority[data-priority="p2"] {
   background-color: seagreen;
 }
-.ticket-priority.p3 {
+.ticket-priority[data-priority="p3"] {
   background-color: cornflowerblue;
 }
-.ticket-priority.p4 {
+.ticket-priority[data-priority="p4"] {
   background-color: black;
 }
 
@@ -223,4 +235,11 @@ main h1 {
 }
 .ticket-lock.locked .fa-lock {
   display: block;
+}
+.ticket-delete {
+  position: absolute;
+  left: 10px;
+  bottom: 8px;
+  cursor: pointer;
+  display: none;
 }
