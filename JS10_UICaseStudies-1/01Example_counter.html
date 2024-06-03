@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style type="text/css">
+      .counter-wrapper {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+      }
+
+      .reset {
+        width: 80px;
+      }
+
+      .count {
+        font-size: 40px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="counter-wrapper">
+      <div class="count">0</div>
+      <div class="button">
+        <button class="decrement">-</button>
+        <button class="increment">+</button>
+      </div>
+      <div class="change-value-section">
+        <span> Increment/Decrement by: </span>
+        <input type="number" value="1" />
+      </div>
+      <button class="reset">Reset</button>
+    </div>
+    <script src="./01index.js"></script>
+  </body>
+</html>
