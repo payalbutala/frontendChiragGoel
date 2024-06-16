@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      Lecture | Full Stack LLD & Projects: JavaScript-5: Async-1 - Asynchronous
+      Callbacks
+      https://www.scaler.com/academy/mentee-dashboard/class/208302/session?joinSession=1
+    </title>
+    <style>
+      body {
+        font-size: 20px;
+        font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>Agenda</h2>
+    <ul>
+      <li>
+        <h4>JavaScript</h4>
+        <p>
+          Executes in Browser & Server(node JS - machine which is equipped to
+          run your code.) Eg: Terminal.
+        </p>
+        <p><b>Browser :</b></p>
+        <ol>
+          <li>
+            : code which run in browser don't have access to play with file
+            system.
+          </li>
+          <li>It has window object</li>
+        </ol>
+
+        <p><b>Node (Terminal), Node Js (Language), In Terminal :</b></p>
+        <ol>
+          <li>
+            Server : code which run in terminal have access to play with file
+            system.
+          </li>
+          <li>It has global Object</li>
+        </ol>
+      </li>
+      <li>
+        Promises
+        <ol>
+          <li>
+            Purpose : To solve callback hell. Example1.js : Difficult to manage,
+            track things which wants to execute back to back.
+          </li>
+          <li>Handles Asynch Tasks</li>
+          <li>
+            <b
+              >Handles/State :
+              <ul>
+                <li>Pending - state1</li>
+                <li>Filfilled - state2 OR</li>
+                <li>Rejected - state2</li>
+              </ul>
+            </b>
+          </li>
+          <li>
+            Methods:
+            <ol style="font-weight: bolder">
+              <li>fetch : fetch('' : contains URL)</li>
+              <li>
+                fetch('https://dummyjson.com/todos')<br />.then(function(res){return
+                res.json()})<br />.then(function(data){console.log(data)})
+              </li>
+              <li>
+                ======= PROMISES GOES TO MICROTASK QUEUE IN EXECUTION CONTEXT
+                WHICH IS LIKE VIP - GETS EXECUTE BEFORE TASK QUEUE(SETTIMEOUT),
+                unless we set time in promises as SetTimeout
+              </li>
+            </ol>
+          </li>
+        </ol>
+      </li>
+      <li>Promises in Node JS</li>
+      <li>Micro/Macro Task Queue</li>
+    </ul>
+    <hr />
+    <h3>Revision</h3>
+    <!-- <ul>
+      <li>
+        Q1. Make it using global Variable & not DOM Manipulation - Only DOM
+        write
+      </li>
+      <li>Q3. understand and use timeStamp in requestAnimationFrame</li>
+    </ul> -->
+  </body>
+</html>
