@@ -1,5 +1,5 @@
 // Create own fetch which is a method of Promises.
-
+/* 
 const data = {
   todos: [
     {
@@ -204,10 +204,10 @@ fetchAllTodo()
   })
   .catch(function (err) {
     console.log(err);
-  });
+  }); */
 
 // Example2
-const fetchTodoById = function (id) {
+/* const fetchTodoById = function (id) {
   // write a promise to return todo object
   // after 5 second delay
   // with a given todo id
@@ -234,4 +234,44 @@ fetchTodoById(4)
   })
   .catch(function (err) {
     console.log("Rejected with : ", err);
+  });
+ */
+
+const fs = require("fs");
+// const { resolve } = require("path");
+
+const readTxtFile = new Promise(function (resolve, reject) {
+  fs.readFile("file1.txt", function (err, f1Data) {
+    console.log(f1Data.toString());
+    if (f1Data) {
+      resolve("Yes, File Data IS : " + f1Data.toString());
+    } else {
+      reject("No, Can't read file.");
+    }
+  });
+});
+
+readTxtFile
+  .then(function (fileData) {
+    console.log("then", fileData);
+    console.log("Text in file is :", fileData.toString());
+    return "";
+  })
+  .then(function (fileData1) {
+    const readFile2 = new Promise(function (resolve, reject) {
+      fs.readFile("file2.txt", function (error, f2Data) {
+        if (f2Data) {
+          resolve("File2 Data is : " + f2Data.toString());
+        } else {
+          reject("File 2 data in unable to read");
+        }
+      });
+    });
+
+    readFile2.then(function (f2Data) {
+      console.log("File2 data :", f2Data.toString());
+    });
+  })
+  .catch(function (err) {
+    console.log("File read ERROR!", err);
   });
