@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      Lecture | Full Stack LLD & Projects: React-3 : Lifting the state up and
+      useEffect :
+      https://www.scaler.com/academy/mentee-dashboard/class/223596/session?joinSession=1
+    </title>
+
+    <link rel="stylesheet" src="../body_fontStyle.css" />
+  </head>
+  <body>
+    <h2>Agenda</h2>
+    <ul>
+      <li>
+        State
+        <ol>
+          <li>state is async</li>
+          <li><b>React : updates state in Batches</b></li>
+          <li>
+            setState (updtaes count only once) vs setState as fucntion (updtaes
+            count number of times function called)
+          </li>
+        </ol>
+      </li>
+      <li>Form Handling</li>
+      <li>
+        Life Cycle
+        <ol>
+          <li>
+            Mount : Component Birth Phase : dependency - if empty array ([]) :
+            ComponentDidMount Phase : Syntax : { useEffect(() => {
+            console.log("Mount"); }, []) }
+          </li>
+          <li>
+            Update : Component Update Phase : dependency - if you pass nothing
+            OR some elements like [a,b,c] : ComponentDidUpdate Phase : Syntax :
+            { useEffect(() => { console.log("Update"); }, [a,b,c] OR noting) }
+          </li>
+          <li>
+            UnMount : Component Die Phase : when function returns something :
+            Syntax : { useEffect(() => { console.log("Mount"); return () =>
+            {console.log("UnMount");}}, [a,b,c] OR noting) }
+          </li>
+        </ol>
+      </li>
+      <li>
+        hooks : useEffect() -
+        <b>Never Wrap in any condition : if, else, loop, nested function.</b>
+        <b>Use hooks insode component only.</b>
+        <ol>
+          <li>callback</li>
+          <li>dependency - if empty array ([]) : Mount Phase</li>
+          <li>Syntax : { useEffect(() => { }, []) }</li>
+        </ol>
+      </li>
+      <li>Lifting State</li>
+      <li>
+        <ol>
+          <li>
+            <b>
+              expecting only 1 div as one wrapper as it has only single node to
+              accept. but it creates an extra div</b
+            >
+          </li>
+          <li>
+            <b>To avoid extra div -> <React.Fragment></React.Fragment> OR <></b>
+          </li>
+        </ol>
+      </li>
+    </ul>
+    <hr />
+    <h3>Revision</h3>
+    <!-- <ul>
+      <li>
+        Q1. Make it using global Variable & not DOM Manipulation - Only DOM
+        write
+      </li>
+      <li>Q3. understand and use timeStamp in requestAnimationFrame</li>
+    </ul> -->
+  </body>
+</html>

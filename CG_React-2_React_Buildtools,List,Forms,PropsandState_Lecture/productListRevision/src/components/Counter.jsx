@@ -10,7 +10,7 @@ const Counter = ({ initialCount }) => {
     // count++; BEFORE STATE
     // wherever want to update value use method of state to expose
     setCount(count + 1);
-    // console.log(count); // BEFORE STATE : changing value but not rending in UI
+    // console.log(count); // BEFORE STATE : changing value but not rending in UI because setState is async - VIMPPPPPPPPPPPPP
   };
 
   const decrease = () => {

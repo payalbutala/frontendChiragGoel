@@ -45,6 +45,25 @@
                 VIMP
                 <b>await : must be wrapped with function which is aynch.</b>
               </li>
+              <li>
+                Promise.all() =
+                <b>[ALL SHOULD SUCCESS, 1ST FAIL WILL RETUTN FAIL.]</b>
+                : It will return then & there incase any 1 of result fails.
+              </li>
+              <li>
+                Promise.allSettled() =
+                <b>[ALL RESULT WHETHER ITS FAIL/PASS]</b> : It will return
+                result of all promises even if its failure. NO CATCH AFTER TRY.
+              </li>
+              <li>
+                Promise.race() = <b>[FIRST RESULT FAIL/SUCCESS]</b> : Return 1
+                output based on timer. IF first fails then it fails. If 2 with
+                same time, 1st one will return whether its success/failure.
+              </li>
+              <li>
+                Promise.any() = <b>[FIRST SUCCESS IS RESULT.]</b> : Even if
+                there are failure it will give first success.
+              </li>
             </ol>
           </li>
           <li>Callback/ CallbackHell</li>
