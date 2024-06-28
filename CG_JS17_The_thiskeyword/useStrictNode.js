@@ -1,0 +1,81 @@
+"use strict";
+
+console.log("1 : ", this); // ROOT so {} object
+console.log("1.1 : ", this.prototype); // undefined
+
+function test() {
+  return this;
+}
+console.log("2 : ", test()); // undefined
+
+const obj = {
+  name: "Payal Butala",
+  age: 36,
+  getThis: function () {
+    return this; // line 26 call this method : // obj
+  },
+};
+
+console.log("3 : ", obj.getThis());
+
+const getThisFn1 = obj.getThis;
+console.log("4 : ", getThisFn1()); // Undefined
+
+const obj2 = {
+  name: "Vishal Payal",
+  age: 18,
+  getThis: obj.getThis,
+};
+
+console.log("5", obj2.getThis()); // gf > obj2
+
+const obj3 = {
+  name: "Vishal Nair",
+  age: 31,
+  getThis: obj2.getThis,
+};
+
+console.log("6", obj3.getThis()); // obj3
+
+function getThisFn() {
+  return this;
+}
+
+const obj4 = {
+  name: "Payali",
+  age: 22,
+};
+
+const obj5 = {
+  name: "Payal Vishal",
+  age: 32,
+};
+
+console.log("7 : ", getThisFn()); // Undefined
+
+obj4.getThisFn = getThisFn;
+
+console.log("8 : ", obj4.getThisFn()); // gf > obj4
+
+obj5.getThisFn = getThisFn;
+
+console.log("8 : ", obj5.getThisFn()); // gf > obj5
+
+console.log("10 : ", obj5.getThisFn.call(obj4)); // Ans : obj4 : Reason - obj5 is a friend or whatever of getThisFn - boyfriend but call methods tie a knot of him with gf obj4
+
+console.log("11 : ", obj5.getThisFn()); // Obj5
+
+console.log("12 : ", getThisFn.call(obj4)); // Obj4
+
+const getThisFnAfterMarriage = obj4.getThisFn.bind(obj5);
+
+console.log("13 : ", getThisFnAfterMarriage());
+
+console.log("14 : ", getThisFnAfterMarriage.call(obj4)); // Obj5 as Bind - Married with Obj5 so forever output is Obj5
+
+const obj6 = {
+  name: "Payali-Vishal",
+  age: 32,
+  getThisFn: getThisFnAfterMarriage,
+};
+console.log("15 : ", obj6.getThisFn()); // Obj5 as getThisFnAfterMarriage is Marriage/Bind function, its bind obj5

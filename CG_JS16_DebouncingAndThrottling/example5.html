@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      Lecture | Full Stack LLD & Projects: JavaScript-16: Debouncing and
+      Throttling :
+      https://www.scaler.com/academy/mentee-dashboard/class/208300/session?joinSession=1
+    </title>
+    <style>
+      .wrapper {
+        width: 100vw;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      input {
+        width: 500px;
+        height: 40px;
+        padding: 5px 15px;
+        border-radius: 5px;
+        border: 1px solid #363636;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrapper">
+      <input type="text" placeholder="Search Product" />
+    </div>
+    <script>
+      // Call only when request hit last time i.e after 2000ms output should come
+      function trailingDebounceFn(fn, delay) {
+        let ref;
+        return function (...args) {
+          clearTimeout(ref);
+          ref = setTimeout(function () {
+            fn(...args);
+          }, delay);
+        };
+      }
+
+      // Call only when request hit 1st time and then call after given delay i.e after 2000ms next request should come
+      function leadingDebounceFn(fn, delay) {
+        let ref;
+        return function (...args) {
+          // when ref is undefined call function
+          if (!ref) {
+            fn(...args);
+          }
+          clearTimeout(ref);
+          ref = setTimeout(function () {
+            ref = undefined;
+          }, delay);
+        };
+      }
+
+      // Call for first and lasttime i.e apple then it shoulkd call when user type a & then next call is at end when its apple.
+      function debounceFn(fn, delay) {
+        let ref;
+        return function (...args) {
+          if (!ref) {
+            fn(...args);
+          }
+          clearTimeout(ref);
+          ref = setTimeout(function () {
+            fn(...args);
+            ref = undefined;
+          }, delay);
+        };
+      }
+
+      function fn(e) {
+        console.log(e.target.value);
+      }
+
+      const inputDebounce = trailingDebounceFn(fn, 2000);
+      // const inputDebounce = leadingDebounceFn(fn, 2000);
+      // const inputDebounce = debounceFn(fn, 2000);
+
+      const inputRef = document.querySelector("input");
+      inputRef.addEventListener("keyup", inputDebounce);
+    </script>
+  </body>
+</html>

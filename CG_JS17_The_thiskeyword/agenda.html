@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      Lecture | Full Stack LLD & Projects: JavaScript-17: OOPS-1- The this
+      keyword :
+      https://www.scaler.com/academy/mentee-dashboard/class/208305/session?joinSession=1
+    </title>
+    <link rel="stylesheet" href="../body_fontStyle.css" />
+  </head>
+  <body>
+    <h2>Agenda</h2>
+    <ul>
+      <li>oops concept</li>
+      <li>
+        this keyword
+        <ol>
+          <li>Browser : refers to context and this is an object</li>
+          <li>Node/Server :</li>
+        </ol>
+        <b>
+          Bewafa BoyFriend : Who you like ? If you are with GF answer is
+          GIRLFRIEND else CRUSH.
+        </b>
+        <ul>
+          <li>BoyFriend : method : in index.html -> <b>getThis()</b></li>
+          <li>GirlFriend : object : in index.html -> <b>obj</b>.getThis()</li>
+          <li>Crush : window object</li>
+          <li>GirlFriend : calling object</li>
+        </ul>
+      </li>
+      <li>
+        JS Executed
+        <ol>
+          <li>
+            Browser (Client)
+            <ol>
+              <li>Crush = Window Object</li>
+              <li>useStrict : No Crush - its undefined.</li>
+            </ol>
+          </li>
+          <li>
+            Node Environment (Server) :
+            <ol>
+              <li>Crush = Global Object</li>
+              <li>StrictMode : No Crush : its undefined.</li>
+            </ol>
+          </li>
+        </ol>
+      </li>
+      <li>
+        useStrict : Throw Error if:
+        <ol>
+          <li>you can't redeclare variable if its already declared.</li>
+          <li>you can't access variable if its not declared. (No Hoisting)</li>
+          <li>x = 3.14</li>
+          <li>obj = {name:'pp', age: 32}</li>
+          <li>delete x OR delete obj OR delete Fn</li>
+          <li>use variable as reserved keyword</li>
+        </ol>
+      </li>
+      <li>
+        Object Creation
+        <ol>
+          <li>
+            Using Constructor : functionName starts with Caps, value assign as
+            .this
+          </li>
+        </ol>
+      </li>
+    </ul>
+    <hr />
+    <h3>Revision</h3>
+    <ul>
+      <li></li>
+    </ul>
+  </body>
+</html>
