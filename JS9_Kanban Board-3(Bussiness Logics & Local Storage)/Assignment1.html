@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+  <!-- Please NOTE that the link to assets (like images) need to be set in global context.
+For example:
+To access an image from assets folder correct way to set src attribute is 
+
+src = 'profile.png'
+
+instead of 
+
+src = './assets/profile.png'
+-->
+
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ticket Management App</title>
+
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        padding: 0;
+      }
+
+      .toolbox-cont {
+        height: 5rem;
+        background-color: #4b4b4b;
+        display: flex;
+        align-items: center;
+      }
+
+      .toolbox-cont > * {
+        margin-left: 4rem;
+      }
+
+      .toolbox-priority-cont {
+        height: 3.5rem;
+        width: 18rem;
+        background-color: #3d3d3d;
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;
+      }
+
+      .action-btn-cont {
+        height: 3.5rem;
+        width: 8rem;
+        background-color: #3d3d3d;
+        display: flex;
+      }
+
+      .action-btn-cont > * {
+        display: flex;
+        justify-content: center;
+        width: 50%;
+        font-size: 2rem;
+        align-items: center;
+        color: white;
+      }
+
+      .color {
+        height: 1.5rem;
+        width: 3rem;
+      }
+
+      .lightpink {
+        background-color: lightpink;
+      }
+
+      .lightgreen {
+        background-color: lightgreen;
+      }
+
+      .lightblue {
+        background-color: lightblue;
+      }
+
+      .black {
+        background-color: black;
+      }
+
+      .modal-cont {
+        height: 50vh;
+        width: 45vw;
+        background: lightblue;
+        position: absolute;
+        top: 30%;
+        left: 25%;
+        display: none;
+      }
+
+      .textArea-cont {
+        height: 100%;
+        width: 75%;
+        background-color: #dfe4ea;
+        outline: none;
+        border: none;
+        resize: none;
+        font-size: 2rem;
+        padding: 2rem;
+      }
+
+      .priority-colors-container {
+        height: 100%;
+        width: 25%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-around;
+        background-color: #4b4b4b;
+      }
+
+      .priority-color {
+        height: 3rem;
+        width: 5rem;
+      }
+
+      .main-cont {
+        display: flex;
+        gap: 2rem;
+        justify-content: center;
+        padding: 2rem;
+        flex-wrap: wrap;
+      }
+
+      .ticket-cont {
+        height: 12rem;
+        width: 15rem;
+        background-color: coral;
+      }
+
+      .ticket-color {
+        height: 1rem;
+      }
+
+      .ticket-id {
+        background-color: yellow;
+        height: 2rem;
+      }
+
+      .ticket-lock {
+        display: flex;
+        font-size: 1.5rem;
+        justify-content: flex-end;
+        margin-top: 90px;
+        margin-right: 5px;
+      }
+
+      .add-btn:hover {
+        background-color: #4bb543;
+      }
+
+      .remove-btn:hover {
+        background-color: #4bb543;
+      }
+
+      .toolbox-priority-cont > *:hover {
+        background-color: #485460;
+      }
+
+      .active {
+        border: 5px solid coral;
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- TOOL BOX ELEMENTS -->
+    <div class="toolbox-cont">
+      <div class="toolbox-priority-cont">
+        <div class="lightpink color"></div>
+        <div class="lightgreen color"></div>
+        <div class="lightblue color"></div>
+        <div class="black color"></div>
+      </div>
+
+      <div class="action-btn-cont">
+        <div class="remove-btn">
+          <img
+            src="data:image/png;base64,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"
+            alt="color-logo"
+            height="50%"
+          />
+        </div>
+      </div>
+    </div>
+
+    <!-- MAIN CONTAINER - Tickets holder -->
+    <div class="main-cont">
+      <!-- <div class="ticket-color ${ticketColor}"></div>
+       <div class="ticket-id">${id}</div>
+       <div class="task-area">${ticketTask}</div> -->
+    </div>
+
+    <script>
+      // WARNING: DO NOT EDIT THE BELOW CODE OR DATA
+
+      // DUMMY DATA FOR THE COLORS
+      let ticketsArr = [
+        {
+          ticketTask: "This is task 1 (lightgreen)",
+          ticketColor: "lightgreen",
+          ticketID: "dGSUFjfiq",
+        },
+        {
+          ticketTask: "This is task 2 (black)",
+          ticketColor: "black",
+          ticketID: "ay8dQS0o1",
+        },
+        {
+          ticketTask: "This is task 3 (lightblue)",
+          ticketColor: "lightblue",
+          ticketID: "fOqBFgQtx",
+        },
+        {
+          ticketTask: "This is task 4 (lightpink)",
+          ticketColor: "lightpink",
+          ticketID: "fOqBFgQtx",
+        },
+      ];
+
+      // CALLING createTicket() function for each value in ticketsArr
+      ticketsArr.forEach(function (ticket) {
+        createTicket(ticket.ticketTask, ticket.ticketColor, ticket.ticketID);
+      });
+
+      // ADDING TICKET TO DOM
+      function createTicket(ticketTask, ticketColor, ticketID) {
+        let id = ticketID || shortid();
+        let ticketCont = document.createElement("div");
+        ticketCont.setAttribute("class", "ticket-cont");
+
+        ticketCont.innerHTML = `<div class="ticket-color ${ticketColor}"></div>
+               <div class="ticket-id">${id}</div>
+               <div class="task-area">${ticketTask}</div>`;
+
+        let mainCont = document.querySelector(".main-cont");
+        mainCont.append(ticketCont);
+
+        if (!ticketID) {
+          ticketsArr.push({ ticketTask, ticketColor, ticketID: id });
+          localStorage.setItem("tickets", JSON.stringify(ticketsArr));
+        }
+      }
+
+      // Write your solution here ====================================================
+      const removeBtnRef = document.querySelector(".remove-btn");
+      const ticketContentRef = document.querySelectorAll(".ticket-cont");
+      let flagDeleteBtn = false;
+
+      removeBtnRef.addEventListener("click", function (e) {
+        console.log("click", e.target);
+        flagDeleteBtn = !flagDeleteBtn;
+        if (flagDeleteBtn) {
+          removeBtnRef.style.backgroundColor = "red";
+          alert("delete button has been activated");
+        } else {
+          removeBtnRef.style.backgroundColor = "inherit";
+        }
+      });
+
+      ticketContentRef.forEach((item, index) => {
+        // console.log(index);
+        const eleIndex = index;
+        item.addEventListener("click", function (e) {
+          //   console.log(e.target.querySelector(".ticket-id").innerText);
+          const currentTicketId =
+            e.target.querySelector(".ticket-id").innerText;
+          ticketsArr.find(function (item, index) {
+            console.log(item, index);
+            if (index === eleIndex) {
+              ticketsArr.splice(index, 1);
+            }
+            console.log(ticketsArr);
+          });
+
+          const currentElement = e.target.closest(".ticket-cont");
+          if (flagDeleteBtn) {
+            currentElement.remove();
+          }
+        });
+      });
+
+      // alert;
+      // remove click ticket
+      // remove button red
+
+      // remove btn non-clickable
+      // do not remove ticket on click
+      // remove button - default
+    </script>
+  </body>
+</html>
